@@ -39,7 +39,7 @@ class App extends MX_Controller
     public function getModule($path) {
         return $this->ModuleModel->getDetail('path', $path);
     }
-
+    
     public function handleActiveModule() {
         $module = (!is_null($this->app()->active_module)) ?  (int) $this->app()->active_module->is_active : null;
 

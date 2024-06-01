@@ -53,6 +53,7 @@ $route['default_controller'] = 'dashboard';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['page/delete_comment']['get'] = 'page/delete_comment';
+$route['brand-product/(:any)']['get'] = 'product/product_brand/$1';
 $route['page/post_comment']['post'] = 'page/post_comment';
 $route['page/(:any)'] = 'page/view/$1';
 $route['blog/delete_comment']['get'] = 'blog/delete_comment';

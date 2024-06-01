@@ -6,21 +6,26 @@
 	<div class="container">
 
 		<header class="section-header">
-			<h3>Select Brand</h3> 
+			<h3><?php echo (!empty($app->active_module->name) ? $app->active_module->name : '-') ?> <?php echo (!empty($brand->name) ? $brand->name : '-') ?></h3>
+			<p><?php echo (!empty($app->active_module->description) ? $app->active_module->description : '-') ?></p>
 		</header>
 
 		<?php if (count($data) > 0): ?>
 		<div class="row">
-			<?php foreach ($data_clients as $index => $item): ?>
+			<?php foreach ($data as $index => $item): ?>
 			<div class="col-md-6 col-lg-3">
 				<div class="box box-item">
-					<img src="<?php echo base_url($item->logo) ?>" />
+					<img src="<?php echo base_url($item->image1) ?>" />
 					<div class="detail">
 						<div class="title">
-							<a href="<?php echo base_url('brand-product/'.$item->id) ?>">
+							<a href="<?php echo base_url('product/'.$item->link) ?>">
 								<?php echo $item->name ?>
 							</a>
-						</div> 
+						</div>
+						<div class="footer">
+							<div class="left">Rp <?php echo number_format($item->price) ?></div>
+							<div class="right"><?php echo ($item->sold_out <= $item->stock) ? 'Tersedia' : 'Kosong' ?></div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -28,7 +33,8 @@
 		</div>
 		<?php else: ?>
 		<div class="nothing-found"><div>No data found</div></div>
-		<?php endIf; ?> 
+		<?php endIf; ?>
+
 		<div class="text-center" style="margin-top: 20px;">
       <?php echo $pagination ?>
     </div>

@@ -6,7 +6,7 @@ class Product extends App
 {
 	function __construct() {
 		parent::__construct();
-		$this->load->model(['ProductModel', 'ProductCategoryModel']);
+		$this->load->model(['ProductModel', 'ProductCategoryModel','ClientModel']);
 		$this->load->library('pagination');
 	}
 
@@ -16,6 +16,7 @@ class Product extends App
 			'app' => $this->app(),
 			'data' => $this->ProductModel->getAll([], [], $pagination->config->per_page, $pagination->offset),
 			'data_category' => $this->ProductCategoryModel->getAll(),
+			'data_clients' => $this->ClientModel->getAll(), 
 			'pagination' => $pagination->link
 		);
 
@@ -23,11 +24,23 @@ class Product extends App
 		$this->template->load_view($data['app']->template_frontend.'/index', $data, TRUE);
 		$this->template->render();
 	}
-
-	public function view($link = null) {
-		$temp = $this->ProductModel->getDetail('link', $link);
-
-		if (count($temp) == 1) {
+	public function product_brand($link = null)
+    { 
+        $pagination = $this->setPagination();
+		$data = array(
+			'app' => $this->app(),
+			'data' => $this->ProductModel->getByBrand($link),
+			'brand' => $this->ProductModel->getBrand($link),
+			'data_category' => $this->ProductCategoryModel->getAll(),
+			'pagination' => $pagination->link
+		); 
+		$this->template->set('title', $data['app']->active_module->name . ' | ' . $data['app']->app_name, TRUE);
+		$this->template->load_view($data['app']->template_frontend.'/brand-product', $data, TRUE);
+		$this->template->render();
+    }
+	public function view($link = null) { 
+		$temp = $this->ProductModel->getDetail('link', $link); 
+		if (isset($temp->id)) {
 			$data = array(
 				'app' => $this->app(),
 				'data' => $temp,

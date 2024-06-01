@@ -51,6 +51,27 @@
                     </div>
                   </div>
                 </div>
+              <div class="col-xs-10 col-md-6">
+                  <div class="form-group">
+                    <label required>Brand</label>
+                    <div class="select">
+                      <select name="client_id" class="form-control client_id">
+                        <option value="">(Empty)</option>
+                        <?php
+                          if (count($data_clients) > 0) {
+                            $category = '';
+                            foreach ($data_clients as $index => $item) {
+                              $selected = (isset($data->client_id) && $data->client_id == $item->id) ? 'selected' : '';
+                              $category .= '<option value="'.$item->id.'" '.$selected.'>'.$item->name.'</option>';
+                            };
+                            echo $category;
+                          };
+                        ?>
+                      </select>
+                      <i class="form-group__bar"></i>
+                    </div>
+                  </div>
+                </div>
                 <div class="col-xs-10 col-md-6">
                   <div class="form-group">
                     <label required>Name</label>
@@ -172,8 +193,8 @@
                   </div>
                 </div>
               </div>
-            </div>
-
+              <div class="col-xs-10 col-md-6">
+                
             <div class="form-group">
               <label required>Link</label>
               <div class="input-group">
@@ -191,6 +212,9 @@
                 <i class="form-group__bar"></i>
               </div>
             </div>
+              </div>
+            </div>
+
 
             <div class="form-group">
               <label required>Description</label>

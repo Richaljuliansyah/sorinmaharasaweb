@@ -14,6 +14,11 @@ class ProductModel extends CI_Model
         'rules' => 'trim|required'
       ],
       [
+        'field' => 'client_id',
+        'label' => 'Brand',
+        'rules' => 'trim|required'
+      ],
+      [
         'field' => 'name',
         'label' => 'Name',
         'rules' => 'trim|required'
@@ -53,7 +58,12 @@ class ProductModel extends CI_Model
   public function getAll($params = [], $orders = [], $limit = null, $offset = null) {
     return $this->db->where($params)->order_by($orders)->get($this->_tableView, $limit, $offset)->result();
   }
-
+  public function getByBrand($brand) {
+    return $this->db->where('client_id', $brand)->get($this->_tableView)->result();
+  } 
+  public function getBrand($brand) {
+    return $this->db->where('id', $brand)->get('client')->row();
+  } 
   public function getDetail($where, $value) {
     return $this->db->get_where($this->_tableView, [$where => $value])->row();
   }
@@ -75,6 +85,7 @@ class ProductModel extends CI_Model
       $post['sold_out'] = str_replace('.', '', $post['sold_out']);
   
       $this->product_category_id = $post['product_category_id'];
+      $this->client_id = $post['client_id'];
       $this->name = $post['name'];
       $this->price = $post['price'];
       $this->description = $this->br2nl($post['description']);
@@ -118,6 +129,7 @@ class ProductModel extends CI_Model
       $post['image4'] = (!empty($post['image4'])) ? $post['image4'] : $temp->image4;
   
       $this->product_category_id = $post['product_category_id'];
+      $this->client_id = $post['client_id'];
       $this->name = $post['name'];
       $this->price = $post['price'];
       $this->description = $this->br2nl($post['description']);

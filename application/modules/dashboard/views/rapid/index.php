@@ -9,13 +9,13 @@
 	<div class="intro-layer">
 		<div class="container d-flex h-100">
 			<div class="row justify-content-center align-self-center">
-				<div class="col intro-info order-md-first order-last">
+				<div class="col-md-6 intro-info order-md-first order-last">
 					<?php echo $data->intro ?>
 					<div>
 						<a href="<?php echo base_url('about') ?>" class="btn-get-started scrollto">Get Started</a>
 					</div>
 				</div>
-				<div class="col intro-img order-md-last order-first">
+				<div class="col-md-6 intro-img order-md-last order-first">
 					<img src="<?php echo base_url($data->intro_image) ?>" alt="" class="img-fluid">
 				</div>
 			</div>
@@ -36,7 +36,7 @@
 		<?php if (count($data_client) > 0): ?>
 		<div class="owl-carousel clients-carousel">
 		<?php foreach ($data_client as $index => $item): ?>
-			<a href="<?php echo $item->link ?>" target="_blank">
+			<a href="<?php echo base_url('brand-product/'. $item->id) ?>">
 				<img src="<?php echo base_url($item->logo) ?>" alt="<?php echo $item->name ?>">
 			</a>
 			<?php endForeach; ?>

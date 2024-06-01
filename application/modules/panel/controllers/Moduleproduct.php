@@ -10,6 +10,7 @@ class ModuleProduct extends AppBackend
       'AppModel',
       'ProvincesModel',
       'RegenciesModel',
+      'ClientModel',
       '../../product/models/ProductModel',
       '../../product/models/ProductCategoryModel'
     ]);
@@ -33,15 +34,16 @@ class ModuleProduct extends AppBackend
       'main_js' => $this->load_main_js('moduleProduct'),
       'card_title' => 'Module › Product: Create',
       'data_category' => $this->ProductCategoryModel->getAll(),
-      'data_provinces' => $this->ProvincesModel->getAll()
-		);
+      'data_provinces' => $this->ProvincesModel->getAll(), 
+      'data_clients' => $this->ClientModel->getAll(), 
+		);  
 		$this->template->set('title', 'Module Product: Create | ' . $data['app']->app_name, TRUE);
 		$this->template->load_view('moduleProduct/form', $data, TRUE);
 		$this->template->render();
   }
 
 	public function update($id) {
-    $temp = $this->ProductModel->getDetail('id', $id);
+    $temp = $this->ProductModel->getDetail('id', $id); 
 		$data = array(
       'app' => $this->app(),
       'main_js' => $this->load_main_js('moduleProduct'),
@@ -49,6 +51,7 @@ class ModuleProduct extends AppBackend
       'data' => $temp,
       'data_category' => $this->ProductCategoryModel->getAll(),
       'data_provinces' => $this->ProvincesModel->getAll(),
+      'data_clients' => $this->ClientModel->getAll(), 
       'data_regencies' => $this->RegenciesModel->getFilter('province_id', $temp->province_id)
 		);
 		$this->template->set('title', 'Module Product: Update | ' . $data['app']->app_name, TRUE);
